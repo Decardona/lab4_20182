@@ -3,9 +3,9 @@
 *  Prof: Juan Camilo Correa Chica
 *  Fecha: Octubre 1/2018 - Octubre 8/2018
 *  Plazo máximo para enviar enlace para clonar el repositorio: 
-*  Estudiante1: Nombres y apellidos completos
-*  Estudiante2: Nombres y apellidos completos (Opcional, puede trabajar individualmente)
-*  Fecha del ultimo Commit en GitHub: Agregue la fecha y hora del ultimo Commit (aproximada)
+*  Estudiante1: Diego Esteban Cardona Bedoya
+*  Estudiante2: Victor Parra Julio
+*  Fecha del ultimo Commit en GitHub: 01/10/2018 23:00
 
 * 1.Implementar un sistema de reserva de tiquetes de un crucero, que tiene 3 alternativas de ubicación en los camarotes del buque: Clase Económica, 
 *   clase Turística y clase Premium. Cada clase tiene el mismo número de camarotes disponibles: 50.
@@ -23,3 +23,72 @@
 *   nombre de quien lo ha reservado y la cantidad de camarotes aún disponibles.
 *
 */
+
+#include "reserva.h"
+
+int main()
+{
+    int opcion = 0, seccion=1, camarote=0, documento=0, maletines=0;
+    string nombre, admin="info", clave;
+
+
+    Reserva **ptrr = new Reserva*[3];
+
+    for(int i=0; i<3; i++){
+        *(ptrr+i) = new Reserva[50];
+    }
+    do{
+        cout<<"Bienvenido al sistema de reservas de crucero. Seleccione una de las siguiente opciones"<<endl;
+        cout<<"1) Reservar un camarote  |  2) Revisar todas las reservas  |   0) Salir "<<endl<<"Opcion: ";
+        cin>>opcion;
+        switch(opcion){
+            case 1:
+            {
+                cout<<endl<<"Escoja la clase en la que desea viajar: "<<endl;
+                cout<<"1) Economica   |   2) Turistica    |    3) Premium  |   0) Regresar al menu anterior "<<endl<<"Opcion: ";
+                cin>>seccion;
+                cout<<endl<<"Escriba un numero de camarote entre 1 y 50: ";
+                cin>>camarote;
+                if(ptrr[seccion-1][camarote-1].is_reservado()){
+                    cout<<"Este camarote ya se encuentra reservado, por favor intente nuevamente con otro numero de camarote"<<endl<<endl;
+                }else{
+                    cout<<"Este camarote esta disponible "<<endl;
+                    cout<<"Escriba su nombre: ";
+                    cin>>nombre;
+                    cout<<"Documento de identidad: ";
+                    cin>>documento;
+                    cout<<"Numero de maletines que incluira: ";
+                    cin>>maletines;
+                    ptrr[seccion-1][camarote-1].crear_reserva(nombre,documento,maletines);
+                    ptrr[seccion-1][camarote-1].reservar(true);
+                    cout<<"Se ha reservado correctamente tu camarote"<<endl<<endl;
+                }
+                break;
+            }
+            case 2:
+            {
+                cout<<"Especifique su clave de administrador: ";
+                cin>>clave;
+                if(admin.compare(clave)==0){
+                    cout<<"Bienvenido Administrador "<<endl<<"Estamos revisando todos los camarotes por favor aguarde..."<<endl<<endl;
+                    for (int i=0; i<3; i++){
+                        for(int j=0; j<50; j++){
+                            if (j%10==0 and j>0){
+                                cout<<"(S)iguiente pagina ... : ";
+                                cin>>nombre;
+                            }
+                            cout<<"Seccion "<<i+1<<". Camarote No "<<j+1<<endl;
+                            if (ptrr[i][j].is_reservado())
+                                ptrr[i][j].mostrar_datos();
+                            else
+                                cout<<"Camarote sin reservar"<<endl<<endl;
+                        }
+                    }
+                }
+                break;
+            }
+        }
+    }while(opcion>0);
+
+    return 0;
+}
