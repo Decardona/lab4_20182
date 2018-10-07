@@ -5,7 +5,7 @@
 *  Plazo máximo para enviar enlace para clonar el repositorio: 
 *  Estudiante1: Diego Esteban Cardona Bedoya
 *  Estudiante2: Victor Parra Julio
-*  Fecha del ultimo Commit en GitHub: 01/10/2018 23:00
+*  Fecha del ultimo Commit en GitHub: 06/10/2018 22:00
 
 * 1.Implementar un sistema de reserva de tiquetes de un crucero, que tiene 3 alternativas de ubicación en los camarotes del buque: Clase Económica, 
 *   clase Turística y clase Premium. Cada clase tiene el mismo número de camarotes disponibles: 50.
@@ -69,20 +69,22 @@ int main()
             {
                 cout<<"Especifique su clave de administrador: ";
                 cin>>clave;
+                unsigned int reservados = 0;
                 if(admin.compare(clave)==0){
                     cout<<"Bienvenido Administrador "<<endl<<"Estamos revisando todos los camarotes por favor aguarde..."<<endl<<endl;
                     for (int i=0; i<3; i++){
+                        cout<<"Secccion: "<<i+1<<endl<<"================"<<endl;
                         for(int j=0; j<50; j++){
-                            if (j%10==0 and j>0){
-                                cout<<"(S)iguiente pagina ... : ";
-                                cin>>nombre;
-                            }
-                            cout<<"Seccion "<<i+1<<". Camarote No "<<j+1<<endl;
-                            if (ptrr[i][j].is_reservado())
+                            if (ptrr[i][j].is_reservado()){
+                                cout<<"Camarote "<<j+1<<endl;
                                 ptrr[i][j].mostrar_datos();
-                            else
-                                cout<<"Camarote sin reservar"<<endl<<endl;
+                                reservados++;
+                            }
                         }
+                        cout<<"Resumen. Para esta seccion tenemos "<<reservados<<" camarotes reservados. Todavia nos faltan "<<50-reservados<<" camarotes por reservar"<<endl<<"(C)ontinuar =>";
+                        cin>>nombre;
+                        reservados = 0;
+                        cout<<endl;
                     }
                 }
                 break;
