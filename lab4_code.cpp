@@ -5,7 +5,7 @@
 *  Plazo máximo para enviar enlace para clonar el repositorio: 
 *  Estudiante1: Diego Esteban Cardona Bedoya
 *  Estudiante2: Victor Parra Julio
-*  Fecha del ultimo Commit en GitHub: 06/10/2018 22:00
+*  Fecha del ultimo Commit en GitHub: 08/10/2018 18:15
 
 * 1.Implementar un sistema de reserva de tiquetes de un crucero, que tiene 3 alternativas de ubicación en los camarotes del buque: Clase Económica, 
 *   clase Turística y clase Premium. Cada clase tiene el mismo número de camarotes disponibles: 50.
@@ -91,6 +91,6 @@ int main()
             }
         }
     }while(opcion>0);
-
+    delete *ptrr;
     return 0;
 }
