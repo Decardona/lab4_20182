@@ -5,7 +5,7 @@
 *  Plazo máximo para enviar enlace para clonar el repositorio: 
 *  Estudiante1: Diego Esteban Cardona Bedoya
 *  Estudiante2: Victor Parra Julio
-*  Fecha del ultimo Commit en GitHub: 08/10/2018 18:15
+*  Fecha del ultimo Commit en GitHub: 14/10/2018 23:40
 
 * 1.Implementar un sistema de reserva de tiquetes de un crucero, que tiene 3 alternativas de ubicación en los camarotes del buque: Clase Económica, 
 *   clase Turística y clase Premium. Cada clase tiene el mismo número de camarotes disponibles: 50.
@@ -22,13 +22,23 @@
 *   administrador, por seguridad), si el password es correcto entonces se debe mostrar en pantalla los camarotes reservados por cada clase viajera y el 
 *   nombre de quien lo ha reservado y la cantidad de camarotes aún disponibles.
 *
+* 2. Implemente tres clases llamadas Mamifero, Alado, Acuatico. Para cada una de las clases debe definir por lo menos 4 atributos que
+*    describan las caracteristicas mas sobresalientes. Ademas debe agregar por lo menos 4 metodos redefinibles que permitan interactuar con
+*    y modificar esos atributos. Luego implemente las clases Murcielago, Ornitorrinco y Manatí que heredan de las clases construidas anteriormente.
+*    Redefina los metodos en cada una de estas clases, recuerde que estas clases derivadas pueden heredar de varias clases al tiempo. En
+*    las clases derivadas implemente los constructores de forma que a traves de ellos pueda inicializar también los constructores de las
+*    clases bases (¡Si no se ha explicado, consulte como hacerlo!).
 */
 
 #include "reserva.h"
+#include "murcielago.h"
+#include "ornitorrinco.h"
+#include "manati.h"
+
 
 int main()
 {
-    int opcion = 0, seccion=1, camarote=0, documento=0, maletines=0;
+    /*int opcion = 0, seccion=1, camarote=0, documento=0, maletines=0;
     string nombre, admin="info", clave;
 
 
@@ -91,6 +101,25 @@ int main()
             }
         }
     }while(opcion>0);
-    delete *ptrr;
+    delete *ptrr;*/
+    // Punto 2
+    Murcielago murcia("Quiropedo", false, 2, "Pardo");
+    murcia.setTamanio(30);
+    murcia.setEdad(1);
+    murcia.volar();
+    murcia.aterrizar();
+    cout<<endl<<"Caracteristicas del Murcielago -------"<<endl;
+    murcia.ver_caracteristicas();
+
+    Ornitorrinco orn("O. anatinus",true,false,true,true,true);
+    orn.setColor("Marron intenso");
+    cout<<endl<<"Caracteristicas del Ornitorrinco ------------"<<endl;
+    orn.mostrar_caracteristicas();
+
+    Manati manatus("Tichechus manatus", true, false, false,true,false,true);
+    manatus.setColor("Gris");
+    manatus.setRegion("Caribe");
+    cout<<endl<<"Caracteristicas del Manati ------------"<<endl;
+    manatus.ver_caracteristicas();
     return 0;
 }
